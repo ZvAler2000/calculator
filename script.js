@@ -2,6 +2,7 @@ let display = ""
 let lastOperator = '+';
 let firstNumber, secondNumber, result;
 let operators = ['+', '-', '*', '/'];
+let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let isOperatorChosen = false;
 
 firstNumber = 0;
@@ -32,14 +33,14 @@ let buttons = document.getElementById("buttons");
 buttons.addEventListener("click", (event) => loadValue(event.target.textContent));
 
 function loadValue(input) {
-    if(parseInt(input) >= 0 && parseInt(input) < 10 && !isOperatorChosen) {
+    if(numbers.includes(parseInt(input)) && !isOperatorChosen) {
         firstNumber *= 10;
         firstNumber += parseInt(input);
 
         disp.textContent = firstNumber;
     }
 
-    if(parseInt(input) >= 0 && parseInt(input) < 10 && isOperatorChosen) {
+    if(numbers.includes(parseInt(input)) && isOperatorChosen) {
         secondNumber *= 10;
         secondNumber += parseInt(input);
 
@@ -49,6 +50,7 @@ function loadValue(input) {
     if(operators.includes(input)) {
         lastOperator = input;
         isOperatorChosen = true;
+        secondNumber = 0;
         disp.textContent = secondNumber;
     }
 
@@ -63,23 +65,30 @@ function loadValue(input) {
 
     if(input == '=') {
         switch(lastOperator) {
-            case '+':
-                result = add(firstNumber,secondNumber);
-                disp.textContent = "";
+            case operators[0]:
+                result = firstNumber + secondNumber;
                 disp.textContent = result;
-                console.log(result);
-            case '-':
-                result = subtract(firstNumber,secondNumber);
+                firstNumber = result;
+                // console.log(result);
+                // console.log(firstNumber);
+                // console.log(secondNumber);
+                break;
+            case operators[1]:
+                result = firstNumber - secondNumber;
                 disp.textContent = result;
-            case '*':
-                result = multiply(firstNumber,secondNumber);
+                firstNumber = result;
+                break;
+            case operators[2]:
+                result = firstNumber * secondNumber;
                 disp.textContent = result;
-            case '/':
-                result = divide(firstNumber,secondNumber);
+                firstNumber = result;
+                break;
+            case operators[3]:
+                result = firstNumber / secondNumber;
                 disp.textContent = result;
+                firstNumber = result;
+                break;
         }
-
     }
 
-    console.log(lastOperator);
 }
