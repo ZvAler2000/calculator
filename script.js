@@ -90,5 +90,19 @@ function loadValue(input) {
                 break;
         }
     }
-
 }
+
+function operate(a,b,operator) {
+    switch(operator) {
+        case operators[0]:
+            return a + b;
+        case operators[1]:
+            return a - b;
+        case operators[2]:
+            return a * b;
+        case operators[3]:
+            return a / b;
+    }
+}
+
+console.log(operate(1, 2, '/'));

@@ -1,7 +1,39 @@
 #buttons div {
     height: 32px;
     width: 32px;
-    border: 4px black groove;
     text-align: center;
     align-items: center;
+    flex: 1;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+#calculator {
+    width: 150px;
+    padding: 4px;
+}
+
+#rows {
+    display: flex;
+    flex-direction: column;
+}
+
+#display {
+    height: 32px;
+    border: 4px black groove;
+    width: auto;
+    height: auto;
+
+}
+
+html {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
