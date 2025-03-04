@@ -1,10 +1,12 @@
 let display = ""
-let lastOperator = '+';
+let lastOperator , newOperator;
 let firstNumber, secondNumber, result;
 let operators = ['+', '-', '*', '/'];
 let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let isOperatorChosen = false;
+let isChosenAgain = false;
 
+lastOperator = null;
 firstNumber = 0;
 secondNumber = 0;
 result = 0;
@@ -48,10 +50,66 @@ function loadValue(input) {
     }
 
     if(operators.includes(input)) {
-        lastOperator = input;
-        isOperatorChosen = true;
-        secondNumber = 0;
-        disp.textContent = secondNumber;
+        if(lastOperator === null) {
+            lastOperator = input;
+        }else {
+            lastOperator = newOperator;
+            newOperator = input;
+        }
+
+        switch(lastOperator) {
+            case operators[0]:
+                result = firstNumber + secondNumber;
+                firstNumber = result;
+                secondNumber = 0;
+                disp.textContent = firstNumber;
+                break;
+            case operators[1]:
+                result = firstNumber - secondNumber;
+                disp.textContent = result;
+                firstNumber = result;
+                break;
+            case operators[2]:
+                result = firstNumber * secondNumber;
+                disp.textContent = result;
+                firstNumber = result;
+                break;
+            case operators[3]:
+                result = firstNumber / secondNumber;
+                disp.textContent = result;
+                firstNumber = result;
+                break;
+
+        // if(!isOperatorChosen) {
+        //     lastOperator = newOperator;
+        //     newOperator = input
+        //     isOperatorChosen = true;
+        //     secondNumber = 0;
+        //     disp.textContent = secondNumber;
+        // }else {
+        //     switch(lastOperator) {
+        //         case operators[0]:
+        //             result = firstNumber + secondNumber;
+        //             disp.textContent = result;
+        //             firstNumber = result;
+        //             break;
+        //         case operators[1]:
+        //             result = firstNumber - secondNumber;
+        //             disp.textContent = result;
+        //             firstNumber = result;
+        //             break;
+        //         case operators[2]:
+        //             result = firstNumber * secondNumber;
+        //             disp.textContent = result;
+        //             firstNumber = result;
+        //             break;
+        //         case operators[3]:
+        //             result = firstNumber / secondNumber;
+        //             disp.textContent = result;
+        //             firstNumber = result;
+        //             break;
+        //     }
+        // }
     }
 
     if(input == 'CE') {
@@ -64,14 +122,11 @@ function loadValue(input) {
     }
 
     if(input == '=') {
-        switch(lastOperator) {
+        switch(newOperator) {
             case operators[0]:
                 result = firstNumber + secondNumber;
                 disp.textContent = result;
                 firstNumber = result;
-                // console.log(result);
-                // console.log(firstNumber);
-                // console.log(secondNumber);
                 break;
             case operators[1]:
                 result = firstNumber - secondNumber;
@@ -92,6 +147,7 @@ function loadValue(input) {
     }
 }
 
+}
 function operate(a,b,operator) {
     switch(operator) {
         case operators[0]:
@@ -104,5 +160,3 @@ function operate(a,b,operator) {
             return a / b;
     }
 }
-
-console.log(operate(1, 2, '/'));
