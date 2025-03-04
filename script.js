@@ -47,7 +47,7 @@ let clearButton = document.getElementById("clear");
 let numbersButtons = document.getElementById("numbers");
 let operatorButtons = document.getElementById("operators");
 
-clearButton.addEventListener("click", (event) => clearAll());
+
 
 let buttons = document.getElementById("buttons");
 buttons.addEventListener("click", (event) => loadValue(event.target.textContent));
@@ -109,9 +109,9 @@ function loadValue(input) {
     //     disp.textContent = firstNumber;
     // }
 
-    if(input == '=') {
-        disp.textContent = operate(firstNumber, secondNumber, newOperator);
-    }
+    // if(input == '=') {
+    //     disp.textContent = operate(firstNumber, secondNumber, newOperator);
+    // }
 }
 
 function operate(a,b,operator) {
@@ -124,5 +124,28 @@ function operate(a,b,operator) {
             return multiply(a,b);
         case operators[3]:
             return divide(a,b);
+    }
+}
+
+buttons.addEventListener("click", (event) => clickButton(event));
+
+function clickButton(input) {
+    switch(input.target.id) {
+        case 'operators':
+
+            break;
+        case 'numbers':
+
+            break;
+        case 'clear':
+
+            break;
+        case 'equals':
+            if(newOperator) {
+                disp.textContent = operate(firstNumber,secondNumber,newOperator);
+            }
+            console.log("hi")
+            console.trace()
+            break;
     }
 }
