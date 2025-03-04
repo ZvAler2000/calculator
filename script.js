@@ -35,15 +35,12 @@ function clearAll() {
     secondNumber = 0;
     result = 0;
     disp.textContent = result;
-    console.log("Done!");
 }
 
 let disp = document.getElementById("display");
 disp.textContent = firstNumber;
 
 clearAll();
-let equalsButton = document.getElementById("euqals");
-let clearButton = document.getElementById("clear");
 let numbersButtons = document.getElementById("numbers");
 let operatorButtons = document.getElementById("operators");
 
@@ -138,14 +135,12 @@ function clickButton(input) {
 
             break;
         case 'clear':
-
+            clearAll();
             break;
         case 'equals':
             if(newOperator) {
                 disp.textContent = operate(firstNumber,secondNumber,newOperator);
             }
-            console.log("hi")
-            console.trace()
             break;
     }
 }
