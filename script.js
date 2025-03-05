@@ -44,76 +44,25 @@ clearAll();
 let numbersButtons = document.getElementById("numbers");
 let operatorButtons = document.getElementById("operators");
 
-
-
 let buttons = document.getElementById("buttons");
-buttons.addEventListener("click", (event) => loadValue(event.target.textContent));
-
-function loadValue(input) {
-    if(numbers.includes(parseInt(input)) && !isOperatorChosen) {
-        firstNumber *= 10;
-        firstNumber += parseInt(input);
-
-        disp.textContent = firstNumber;
-    }
-
-    if(numbers.includes(parseInt(input)) && isOperatorChosen) {
-        secondNumber *= 10;
-        secondNumber += parseInt(input);
-
-        disp.textContent = secondNumber;
-    }
-
-    // if(operators.includes(input)) {
-    //     if(!isOperatorChosen) {
-    //         lastOperator = newOperator;
-    //         newOperator = input
-    //         isOperatorChosen = true;
-    //         secondNumber = 0;
-    //         disp.textContent = secondNumber;
-    //     }else {
-    //         switch(lastOperator) {
-    //             case operators[0]:
-    //                 result = firstNumber + secondNumber;
-    //                 disp.textContent = result;
-    //                 firstNumber = result;
-    //                 break;
-    //             case operators[1]:
-    //                 result = firstNumber - secondNumber;
-    //                 disp.textContent = result;
-    //                 firstNumber = result;
-    //                 break;
-    //             case operators[2]:
-    //                 result = firstNumber * secondNumber;
-    //                 disp.textContent = result;
-    //                 firstNumber = result;
-    //                 break;
-    //             case operators[3]:
-    //                 result = firstNumber / secondNumber;
-    //                 disp.textContent = result;
-    //                 firstNumber = result;
-    //                 break;
-    //         }
-    //     }
-    // }
-
-    // if(input == 'CE') {
-    //     firstNumber = 0;
-    //     secondNumber = 0;
-    //     result = 0;
-    //     isOperatorChosen = false;
-
-    //     disp.textContent = firstNumber;
-    // }
-
-    // if(input == '=') {
-    //     disp.textContent = operate(firstNumber, secondNumber, newOperator);
-    // }
-}
-
 function selectOperator(input) {
     lastOperator = newOperator;
     newOperator = input.textContent;
+    disp.textContent = secondNumber;
+    if(!newOperator && !lastOperator) {
+    }
+}
+
+function selectOperand(input) {
+    if(!newOperator) {
+        firstNumber *= 10;
+        firstNumber += parseInt(input.textContent);
+        disp.textContent = firstNumber;
+    }else {
+        secondNumber *= 10;
+        secondNumber += parseInt(input.textContent);
+        disp.textContent = secondNumber;
+    }
 }
 
 function operate(a,b,operator) {
@@ -137,7 +86,7 @@ function clickButton(input) {
             selectOperator(input.target);
             break;
         case 'numbers':
-
+            selectOperand(input.target);
             break;
         case 'clear':
             clearAll();
