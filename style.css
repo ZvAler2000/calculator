@@ -10,13 +10,15 @@
     display: flex;
     flex-direction: row;
     width: auto;
-    height: auto;
+    height: 120px;
     flex-wrap: wrap;
+    overflow: auto;
+    padding: 4px;
 }
 
 #calculator {
     width: 150px;
-    padding: 4px;
+    padding: 16px;
 }
 
 #rows {
@@ -29,11 +31,17 @@
     border: 4px black groove;
     width: auto;
     height: auto;
-
+    border-radius: 4px;
+    text-align: end;
 }
 
 html {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+button {
+    margin: 4px;
+    background-color: aquamarine;
 }

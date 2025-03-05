@@ -6,11 +6,6 @@ let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let isOperatorChosen = false;
 let isChosenAgain = false;
 
-// lastOperator = null;
-// firstNumber = 0;
-// secondNumber = 0;
-// result = 0;
-
 function add(a,b) {
     return a + b;
 }
@@ -31,12 +26,12 @@ function divide(a,b) {
     }
 }
 
-
 function clearAll() {
     lastOperator = null;
     newOperator = null;
     firstNumber = null;
     secondNumber = null;
+    isOperatorChosen = false;
     disp.textContent = 0;
 }
 
@@ -44,10 +39,10 @@ let disp = document.getElementById("display");
 disp.textContent = firstNumber;
 
 clearAll();
-let numbersButtons = document.getElementById("numbers");
-let operatorButtons = document.getElementById("operators");
 
 let buttons = document.getElementById("buttons");
+buttons.addEventListener("click", (event) => clickButton(event));
+
 function selectOperator(input) {
     if(!secondNumber) {
         lastOperator = newOperator;
@@ -59,9 +54,12 @@ function selectOperator(input) {
     }else {
         lastOperator = newOperator;
         newOperator = input.textContent;
-        let temp = operate(firstNumber, secondNumber, lastOperator);
-        firstNumber = temp;
-        lastOperator = 0;
+        if(!isOperatorChosen) {
+            let temp = operate(firstNumber, secondNumber, lastOperator);
+            firstNumber = temp;
+            console.log(temp)
+        }
+        secondNumber = 0;
         disp.textContent = firstNumber;
         isOperatorChosen = true;
     }
@@ -80,6 +78,7 @@ function selectOperand(input) {
         secondNumber *= 10;
         secondNumber += parseInt(input.textContent);
         disp.textContent = secondNumber;
+        isOperatorChosen = false;
     }else {
         secondNumber *= 10;
         secondNumber += parseInt(input.textContent);
@@ -100,8 +99,6 @@ function operate(a,b,operator) {
     }
 }
 
-buttons.addEventListener("click", (event) => clickButton(event));
-
 function clickButton(input) {
     switch(input.target.id) {
         case 'operators':
@@ -115,7 +112,9 @@ function clickButton(input) {
             break;
         case 'equals':
             if(newOperator) {
-                disp.textContent = operate(firstNumber,secondNumber,newOperator);
+                firstNumber = operate(firstNumber,secondNumber,newOperator);
+                disp.textContent = firstNumber;
+                isOperatorChosen = false;
             }
             break;
     }
