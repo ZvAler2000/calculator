@@ -1,6 +1,6 @@
 let display = ""
 let lastOperator , newOperator;
-let firstNumber, secondNumber, result;
+let firstNumber, secondNumber;
 let operators = ['+', '-', '*', '/'];
 let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let isOperatorChosen = false;
@@ -31,10 +31,9 @@ function divide(a,b) {
 function clearAll() {
     lastOperator = null;
     newOperator = null;
-    firstNumber = 0;
+    firstNumber = null;
     secondNumber = null;
-    result = 0;
-    disp.textContent = result;
+    disp.textContent = 0;
 }
 
 let disp = document.getElementById("display");
@@ -46,29 +45,40 @@ let operatorButtons = document.getElementById("operators");
 
 let buttons = document.getElementById("buttons");
 function selectOperator(input) {
-    lastOperator = newOperator;
-    newOperator = input.textContent;
-    
-    if(secondNumber == null) {
-        disp.textContent = 0;
+    if(!secondNumber) {
+        lastOperator = newOperator;
+        newOperator = input.textContent;
+        disp.textContent = secondNumber;
+        if(secondNumber === null) {
+            disp.textContent = 0;
+        }
     }else {
-        firstNumber = operate(firstNumber, secondNumber, input.textContent);
+        lastOperator = newOperator;
+        newOperator = input.textContent;
+        let temp = operate(firstNumber, secondNumber, lastOperator);
+        firstNumber = temp;
+        lastOperator = 0;
         disp.textContent = firstNumber;
-        secondNumber = 0;
+        isOperatorChosen = true;
     }
 }
 
 function selectOperand(input) {
     if(!newOperator) {
+        if(firstNumber === null) {
+            firstNumber = 0;
+        }
         firstNumber *= 10;
         firstNumber += parseInt(input.textContent);
         disp.textContent = firstNumber;
-    }else if(secondNumber != null) {
+    }else if(isOperatorChosen) {
+        secondNumber = 0;
         secondNumber *= 10;
         secondNumber += parseInt(input.textContent);
         disp.textContent = secondNumber;
-    }else if(secondNumber == null) {
-        secondNumber = parseInt(input.textContent);
+    }else {
+        secondNumber *= 10;
+        secondNumber += parseInt(input.textContent);
         disp.textContent = secondNumber;
     }
 }
