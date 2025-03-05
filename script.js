@@ -32,7 +32,7 @@ function clearAll() {
     lastOperator = null;
     newOperator = null;
     firstNumber = 0;
-    secondNumber = 0;
+    secondNumber = null;
     result = 0;
     disp.textContent = result;
 }
@@ -48,8 +48,13 @@ let buttons = document.getElementById("buttons");
 function selectOperator(input) {
     lastOperator = newOperator;
     newOperator = input.textContent;
-    disp.textContent = secondNumber;
-    if(!newOperator && !lastOperator) {
+    
+    if(secondNumber == null) {
+        disp.textContent = 0;
+    }else {
+        firstNumber = operate(firstNumber, secondNumber, input.textContent);
+        disp.textContent = firstNumber;
+        secondNumber = 0;
     }
 }
 
@@ -58,9 +63,12 @@ function selectOperand(input) {
         firstNumber *= 10;
         firstNumber += parseInt(input.textContent);
         disp.textContent = firstNumber;
-    }else {
+    }else if(secondNumber != null) {
         secondNumber *= 10;
         secondNumber += parseInt(input.textContent);
+        disp.textContent = secondNumber;
+    }else if(secondNumber == null) {
+        secondNumber = parseInt(input.textContent);
         disp.textContent = secondNumber;
     }
 }
