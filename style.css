@@ -20,6 +20,7 @@
     width: 190px;
     padding: 16px 8px;
     background-color: #3484CB;
+    border: 4px inset #245d8f;
     border-radius: 24px;
 	box-shadow: 5px 5px 12px rgba(0,0,0,0.5);
 }
@@ -30,16 +31,15 @@
 }
 
 #display {
-    border: 4px black groove;
     width: auto;
     height: auto;
-    border-radius: 4px;
     text-align: end;
     background-color: antiquewhite;
-    padding: 4px;
-    margin: 4px;
-    font-size: large;
-    margin-top: 8px;
+    font-size: x-large;
+    font-family: "Jersey 10 Charted", sans-serif;
+    margin: 8px 16px 4px;
+    border: 4px black groove;
+    border-radius: 4px;
 }
 
 html {
@@ -55,11 +55,13 @@ button {
     height: 32px;
     width: 32px;
     text-align: center;
+    padding: 0%;
     align-items: center;
     border-color: #7FEAFF;
     color: #D47FFF;
 	transform: translateY(0rem);
     transition: all .1s ease-in-out;
+    font-family: "Orbitron", sans-serif;
 }
 
 button:hover {

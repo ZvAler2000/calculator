@@ -51,13 +51,14 @@ function selectOperator(input) {
         if(secondNumber === null) {
             disp.textContent = 0;
         }
+        isOperatorChosen = true;
     }else {
         lastOperator = newOperator;
         newOperator = input.textContent;
         if(!isOperatorChosen) {
             let temp = operate(firstNumber, secondNumber, lastOperator);
             firstNumber = temp;
-            console.log(temp)
+            secondNumber = 0;
         }
         secondNumber = 0;
         disp.textContent = firstNumber;
