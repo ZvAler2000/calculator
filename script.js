@@ -4,7 +4,7 @@ let firstNumber, secondNumber;
 let operators = ['+', '-', '*', '/'];
 let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let isOperatorChosen = false;
-let isChosenAgain = false;
+let isNewOp = false;
 
 function add(a,b) {
     return a + b;
@@ -43,8 +43,19 @@ clearAll();
 let buttons = document.getElementById("buttons");
 buttons.addEventListener("click", (event) => clickButton(event));
 
+let html = document.querySelector("body");
+html.addEventListener("click", (event) => {
+    console.log(firstNumber);
+    console.log(secondNumber);
+    console.log(lastOperator);
+    console.log(newOperator);
+    console.log(isOperatorChosen);
+})
+
 function selectOperator(input) {
+    // TODO: Make sure you can press multiple operator buttons in row without calculator doing anything but changing last operator.
     if(!secondNumber) {
+        console.log("PING!")
         lastOperator = newOperator;
         newOperator = input.textContent;
         disp.textContent = secondNumber;
@@ -55,7 +66,7 @@ function selectOperator(input) {
     }else {
         lastOperator = newOperator;
         newOperator = input.textContent;
-        if(!isOperatorChosen) {
+        if(isOperatorChosen) {
             let temp = operate(firstNumber, secondNumber, lastOperator);
             firstNumber = temp;
             secondNumber = 0;
@@ -63,10 +74,13 @@ function selectOperator(input) {
         secondNumber = 0;
         disp.textContent = firstNumber;
         isOperatorChosen = true;
+        isNewOp = false;
+        console.log("operator was chosen!");
     }
 }
 
 function selectOperand(input) {
+    // TODO: Fix the input for second number(now only can input one operand)
     if(!newOperator) {
         if(firstNumber === null) {
             firstNumber = 0;
@@ -79,11 +93,15 @@ function selectOperand(input) {
         secondNumber *= 10;
         secondNumber += parseInt(input.textContent);
         disp.textContent = secondNumber;
-        isOperatorChosen = false;
-    }else {
+        // isOperatorChosen = false;
+    }else if(!isOperatorChosen) {
+        secondNumber = 0;
+        isNewOp = true;
+    }else if(isNewOp) {
         secondNumber *= 10;
         secondNumber += parseInt(input.textContent);
         disp.textContent = secondNumber;
+        console.log("bok")
     }
 }
 
