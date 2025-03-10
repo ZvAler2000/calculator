@@ -53,7 +53,7 @@ html.addEventListener("click", (event) => {
 })
 
 function selectOperator(input) {
-    // TODO: Make sure you can press multiple operator buttons in row without calculator doing anything but changing last operator.
+    // TODO: Make sure you can press multiple operator buttons in row without calculator doing anything but changing last operator. Done!
     if(!secondNumber) {
         console.log("PING!")
         lastOperator = newOperator;
@@ -89,14 +89,19 @@ function selectOperand(input) {
         firstNumber += parseInt(input.textContent);
         disp.textContent = firstNumber;
     }else if(isOperatorChosen) {
-        secondNumber = 0;
+        if(!isNewOp) {
+            secondNumber = 0;
+        }
         secondNumber *= 10;
         secondNumber += parseInt(input.textContent);
         disp.textContent = secondNumber;
+        isNewOp = true;
         // isOperatorChosen = false;
-    }else if(!isOperatorChosen) {
+        // PART UNDER THIS IF STATEMENT DOES NOT WORK AT ALL!!!!
+    }else if(!isOperatorChosen && !isNewOp) {
         secondNumber = 0;
         isNewOp = true;
+        console.log("Ovaj dio radi!!")
     }else if(isNewOp) {
         secondNumber *= 10;
         secondNumber += parseInt(input.textContent);
