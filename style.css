@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: row;
     width: auto;
-    height: 170px;
+    height: 200px;
     flex-wrap: wrap;
     overflow: auto;
     align-items: center;

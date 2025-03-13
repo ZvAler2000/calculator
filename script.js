@@ -77,7 +77,7 @@ function selectOperator(input) {
 }
 
 function selectOperand(input) {
-    if(!newOperator) {
+    if(!isOperatorChosen) {
         if(firstNumber === null) {
             firstNumber = 0;
         }
@@ -126,5 +126,32 @@ function clickButton(input) {
                 isOperatorChosen = false;
             }
             break;
+        case 'backspace':
+            removeLastDigit();
+        break;
+    }
+}
+
+const decimalPoint = document.getElementById("decimal");
+decimalPoint.addEventListener("click", (event) => {
+    return parseFloat(firstNumber);
+})
+
+
+function removeLastDigit() {
+    if(!isOperatorChosen) {
+        firstNumber = String(firstNumber).slice(0,-1);
+        if(!firstNumber || firstNumber === "nul") {
+            firstNumber = 0;
+        }
+        firstNumber = parseInt(firstNumber);
+        disp.textContent = firstNumber
+    }else {
+        secondNumber = String(secondNumber).slice(0,-1);
+        if(!secondNumber || secondNumber === "nul") {
+            secondNumber = 0;
+        }
+        secondNumber = parseInt(secondNumber);
+        disp.textContent = secondNumber
     }
 }
