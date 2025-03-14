@@ -52,6 +52,24 @@ html.addEventListener("click", (event) => {
     console.log(isOperatorChosen);
 })
 
+function removeLastDigit() {
+    if(!isOperatorChosen) {
+        firstNumber = String(firstNumber).slice(0,-1);
+        if(!firstNumber || firstNumber === "nul") {
+            firstNumber = 0;
+        }
+        firstNumber = parseInt(firstNumber);
+        disp.textContent = firstNumber
+    }else {
+        secondNumber = String(secondNumber).slice(0,-1);
+        if(!secondNumber || secondNumber === "nul") {
+            secondNumber = 0;
+        }
+        secondNumber = parseInt(secondNumber);
+        disp.textContent = secondNumber
+    }
+}
+
 function selectOperator(input) {
     if(!secondNumber) {
         console.log("PING!")
@@ -134,24 +152,6 @@ function clickButton(input) {
 
 const decimalPoint = document.getElementById("decimal");
 decimalPoint.addEventListener("click", (event) => {
-    return parseFloat(firstNumber);
+    firstNumber = disp.textContent + ".0";
+    disp.textContent = firstNumber;
 })
-
-
-function removeLastDigit() {
-    if(!isOperatorChosen) {
-        firstNumber = String(firstNumber).slice(0,-1);
-        if(!firstNumber || firstNumber === "nul") {
-            firstNumber = 0;
-        }
-        firstNumber = parseInt(firstNumber);
-        disp.textContent = firstNumber
-    }else {
-        secondNumber = String(secondNumber).slice(0,-1);
-        if(!secondNumber || secondNumber === "nul") {
-            secondNumber = 0;
-        }
-        secondNumber = parseInt(secondNumber);
-        disp.textContent = secondNumber
-    }
-}
